@@ -16,7 +16,7 @@ public class Nemico : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        accelerazione = 50f;
+        accelerazione = 100f;
 
         Invoke("AutoDistruzione", 10);
 
@@ -80,7 +80,12 @@ public class Nemico : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        gameManager.aggiungiPunti(2);
-        AutoDistruzione();
+        if (collision.collider.name.Equals("Proiettile(Clone)"))
+        {
+            gameManager.aggiungiPunti(2);
+            gameManager.aumentaEnergia(2);
+            AutoDistruzione();
+        }
+        
     }
 }

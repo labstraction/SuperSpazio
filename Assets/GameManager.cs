@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,9 +9,15 @@ public class GameManager : MonoBehaviour
 
     public int punti;
 
+    public int playerEnergy;
+
     public int nemici;
 
     public int maxNemici;
+
+    public Text testoPunti;
+
+    public Text testoEnergia;
 
     private void Awake()
     {
@@ -26,7 +33,8 @@ public class GameManager : MonoBehaviour
 
         punti = 0;
         nemici = 0;
-        maxNemici = 5;
+        maxNemici = 10;
+        playerEnergy = 100;
     }
 
     // Start is called before the first frame update
@@ -45,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         punti = punti + nuoviPunti;
 
-        Debug.Log("Punti: " + punti);
+        testoPunti.text = "Punti: " + punti;
     }
 
     public void aumentaNemici()
@@ -56,6 +64,33 @@ public class GameManager : MonoBehaviour
     public void diminuisciNemici()
     {
         nemici--;
+    }
+
+    public void aumentaEnergia(int nuovaEnergia)
+    {
+        playerEnergy = playerEnergy + nuovaEnergia;
+
+        testoEnergia.text = "Energia: " + playerEnergy;
+    }
+
+    public void diminuisciEnergia(int energiaPersa)
+    {
+        playerEnergy = playerEnergy - energiaPersa;
+
+        testoEnergia.text = "Energia: " + playerEnergy;
+    }
+
+    public bool ilGiocatoreEVivo()
+    {
+        if (playerEnergy > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     public bool possoMandareUnNuovoNemico()

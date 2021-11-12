@@ -18,6 +18,7 @@ public class PlayerScript : MonoBehaviour
 
     private float tempoDiSparo;
 
+    private GameManager gameManager;
     
 
     // Start is called before the first frame update
@@ -29,6 +30,7 @@ public class PlayerScript : MonoBehaviour
         accellerazione = 90f;
         frequenzaDiSparo = 0.5f;
         tempoDiSparo = 0;
+        gameManager = FindObjectOfType<GameManager>();
     }
     // Update is called once per frame
     void Update()
@@ -115,7 +117,12 @@ public class PlayerScript : MonoBehaviour
 
         } else
         {
-            AutoDistruzione();
+            gameManager.diminuisciEnergia(20);
+            if (!gameManager.ilGiocatoreEVivo())
+            {
+                AutoDistruzione();
+            }
+            
         }
         
     }
