@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
 
     public int playerEnergy;
 
+    public int powerUp;
+
+    public float time;
+
     public int nemici;
 
     public int maxNemici;
@@ -18,6 +22,14 @@ public class GameManager : MonoBehaviour
     public Text testoPunti;
 
     public Text testoEnergia;
+
+    public Text testoTime;
+
+    public Text testoPowerUp;
+
+    public Creatore creatore;
+
+    public PlayerScript player;
 
     private void Awake()
     {
@@ -33,8 +45,11 @@ public class GameManager : MonoBehaviour
 
         punti = 0;
         nemici = 0;
-        maxNemici = 10;
+        maxNemici = 3;
         playerEnergy = 100;
+        time = 0;
+        powerUp = 0;
+
     }
 
     // Start is called before the first frame update
@@ -46,7 +61,22 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        time = time + Time.deltaTime;
+        testoTime.text = "Tempo: " + Mathf.RoundToInt(time);
+        maxNemici = 3 + Mathf.FloorToInt(time / 30);
+    }
+
+    public void aumentaPowerUP(int nuoviPunti)
+    {
+        powerUp = powerUp + nuoviPunti;
+
+        if (powerUp >= 5)
+        {
+            player.startPowerUp();
+            powerUp = 0;
+        }
+
+        testoPowerUp.text = "PowerUP: " + powerUp;
     }
 
     public void aggiungiPunti(int nuoviPunti)

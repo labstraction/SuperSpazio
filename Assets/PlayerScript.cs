@@ -19,6 +19,8 @@ public class PlayerScript : MonoBehaviour
     private float tempoDiSparo;
 
     private GameManager gameManager;
+
+    private float powerUpTime;
     
 
     // Start is called before the first frame update
@@ -30,6 +32,7 @@ public class PlayerScript : MonoBehaviour
         accellerazione = 90f;
         frequenzaDiSparo = 0.5f;
         tempoDiSparo = 0;
+        powerUpTime = 0;
         gameManager = FindObjectOfType<GameManager>();
     }
     // Update is called once per frame
@@ -92,6 +95,11 @@ public class PlayerScript : MonoBehaviour
         rb2d.position = Camera.main.ViewportToWorldPoint(posizioneRispettoAllaCamera);
 
 
+        powerUpTime = powerUpTime - Time.deltaTime;
+        if (powerUpTime <= 0)
+        {
+            frequenzaDiSparo = 0.5f;
+        }
 
         
     }
@@ -131,5 +139,11 @@ public class PlayerScript : MonoBehaviour
     {
         gameObject.SetActive(false);
         Destroy(gameObject);
+    }
+
+    public void startPowerUp()
+    {
+        powerUpTime = 10;
+        frequenzaDiSparo = 0.1f;
     }
 }

@@ -39,7 +39,7 @@ public class Nemico : MonoBehaviour
         Vector3 posizioneRispettoAllaCamera = Camera.main.WorldToViewportPoint(rb2d.position);
 
         posizioneRispettoAllaCamera.x = Mathf.Clamp01(posizioneRispettoAllaCamera.x);
-        posizioneRispettoAllaCamera.y = Mathf.Clamp01(posizioneRispettoAllaCamera.y);
+        //posizioneRispettoAllaCamera.y = Mathf.Clamp01(posizioneRispettoAllaCamera.y);
 
         Vector3 velocit‡Attuale = rb2d.velocity;
 
@@ -47,10 +47,10 @@ public class Nemico : MonoBehaviour
         {
             velocit‡Attuale.x = -velocit‡Attuale.x;
         }
-        if (posizioneRispettoAllaCamera.y == 0 || posizioneRispettoAllaCamera.y == 1)
-        {
-            velocit‡Attuale.y = -velocit‡Attuale.y;
-        }
+        //if (posizioneRispettoAllaCamera.y == 0 || posizioneRispettoAllaCamera.y == 1)
+        //{
+        //    velocit‡Attuale.y = -velocit‡Attuale.y;
+        //}
 
         rb2d.velocity = velocit‡Attuale;
 
@@ -80,12 +80,11 @@ public class Nemico : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.name.Equals("Proiettile(Clone)"))
-        {
+
             gameManager.aggiungiPunti(2);
-            gameManager.aumentaEnergia(2);
+            gameManager.aumentaPowerUP(1);
             AutoDistruzione();
-        }
+        
         
     }
 }
