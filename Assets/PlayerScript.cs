@@ -21,6 +21,8 @@ public class PlayerScript : MonoBehaviour
     private GameManager gameManager;
 
     private float powerUpTime;
+
+    private Animator animator;
     
 
     // Start is called before the first frame update
@@ -34,6 +36,8 @@ public class PlayerScript : MonoBehaviour
         tempoDiSparo = 0;
         powerUpTime = 0;
         gameManager = FindObjectOfType<GameManager>();
+
+        animator = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
@@ -128,7 +132,9 @@ public class PlayerScript : MonoBehaviour
             gameManager.diminuisciEnergia(20);
             if (!gameManager.ilGiocatoreEVivo())
             {
-                AutoDistruzione();
+                animator.SetTrigger("isPlayerDead");
+                Invoke("AutoDistruzione", 0.68f);
+                
             }
             
         }
